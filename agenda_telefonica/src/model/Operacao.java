@@ -1,44 +1,61 @@
 package model;
 
-import controller.AgendaPessoaFisica;
-import controller.AgendaPessoaJuridica;
+import controller.PessoaFisicaDAO;
+import controller.PessoaJuridicaDAO;
 import view.InterfaceUsuario;
 
 public class Operacao {
-	InterfaceUsuario iu = new InterfaceUsuario();
-	AgendaPessoaFisica agendaF = new AgendaPessoaFisica();
-	AgendaPessoaJuridica agendaJ = new AgendaPessoaJuridica();
+	public InterfaceUsuario iu = new InterfaceUsuario();
+	public PessoaFisicaDAO pFDAO = new PessoaFisicaDAO();
+	public PessoaJuridicaDAO pJDAO = new PessoaJuridicaDAO();
 	
 	public void operacaoAdicionar() {
-		System.out.println("====================================");
-		System.out.println("=       (0) - Pessoa Fisica        =");
-		System.out.println("=      (1) - Pessoa Juridica       =");
-		System.out.println("====================================\n");
-		System.out.print("- Escolha: ");
-		int op = iu.sc.nextInt();
+		int op = iu.tipoContato();
 		if(op == 0) {
-			agendaF.adicionarPessoa();
+			pFDAO.adicionar();
 		}else if(op == 1){
-			agendaJ.adicionarPessoa();
-		}
-		else {
-			System.out.println("\n---------- Opcao Invalida ----------");
+			pJDAO.adicionar();
 		}
 	}
 	public void operacaoListar() {
-		System.out.println("====================================");
-		System.out.println("=       (0) - Pessoa Fisica        =");
-		System.out.println("=      (1) - Pessoa Juridica       =");
-  		System.out.println("====================================\n");
-		System.out.print("- Escolha: ");
-		int op = iu.sc.nextInt();
+		int op = iu.tipoContato();
 		if(op == 0) {
-			agendaF.listarPessoa();
+			pFDAO.listar();
 		}else if(op == 1){
-			agendaJ.listarPessoa();
+			pJDAO.listar();
 		}
-		else {
-			System.out.println("\n---------- Opcao Invalida ----------");
+	}
+	public void operacaoRemover() {
+		int op = iu.tipoContato();
+		if(op == 0) {
+			pFDAO.remover();
+		}else if(op == 1){
+			pJDAO.remover();
+		}
+	}
+	public void operacaoLixeira() {
+		int op = iu.tipoContato();
+		if(op == 0) {
+			pFDAO.lixeira();
+		}else if(op == 1){
+			pJDAO.lixeira();
+		}
+	}
+	public void operacaoBuscar() {
+		int op = iu.tipoContato();
+		if(op == 0) {
+			pFDAO.buscar();
+		}else if(op == 1){
+			pJDAO.buscar();
+		}
+	}
+
+	public void operacaoEditar() {
+		int op = iu.tipoContato();
+		if(op == 0) {
+			pFDAO.editar();
+		}else if(op == 1){
+			pJDAO.editar();
 		}
 	}
 }

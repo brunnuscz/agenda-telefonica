@@ -4,7 +4,7 @@ public class Pessoa {
 	public String nome;
 	public String telefone;
 	
-	public String tipoDeContato(){
+	public String tipoDePessoa() {
 		return "";
 	}
 }

@@ -4,8 +4,7 @@ public class PessoaFisica extends Pessoa{
 	public Cpf cpf;
 	
 	@Override
-	public String tipoDeContato() {
+	public String tipoDePessoa() {
 		return "Pessoa Fisica";
 	}
-	
 }
