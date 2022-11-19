@@ -22,21 +22,8 @@ public class InterfaceUsuario {
 		System.out.println("=           4 - Editar             =");
 		System.out.println("=           5 - Lixeira            =");
 		System.out.println("=           6 - Buscar             =");
-		System.out.println("=           7 - Sair               =");
+		System.out.println("=           7 - Voltar             =");
 		System.out.println("=                                  =");
 		System.out.println("====================================\n");
-	}
-	// ESCOLHA DE TIPO DE CONTATOS
-	public int tipoContato() {
-		System.out.println(" ---------------------------------- ");
-		System.out.println("         (0) - Pessoa Fisica          ");
-		System.out.println("        (1) - Pessoa Juridica         ");
-		System.out.println(" ---------------------------------- \n");
-		System.out.print(" - Escolha: ");
-		int op = sc.nextInt();
-		if(op != 0 && op != 1) {
-			System.out.println("\n --------- Opcao Invalida --------- ");
-		}
-		return op;
 	}
 }

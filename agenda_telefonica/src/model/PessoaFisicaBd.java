@@ -61,7 +61,7 @@ public class PessoaFisicaBd extends BD{
 		int teste = 0;
 		// Criar um conjunto de elementos-chave contidos no mapa
 		for (String chave : mapPessoas.keySet()) {
-			// a recebe o 1 elemento do conjunto de chaves
+			// O a recebe o 1 elemento do conjunto de chaves
 			Pessoa a = mapPessoas.get(chave);
 			// Se a palavra digitada contem nas chaves do map
 			if(a.nome.contains(n)) {
@@ -145,7 +145,7 @@ public class PessoaFisicaBd extends BD{
 		if(p.size() != 0) {
 			return true;
 		}else {
-			System.out.println("\n ----------- Lista Vazia ---------- ");
+			System.out.println(" ----------- Lista Vazia ---------- ");
 			return false;
 		}
 	}

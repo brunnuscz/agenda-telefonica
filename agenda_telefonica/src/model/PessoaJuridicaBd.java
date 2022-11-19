@@ -70,9 +70,12 @@ public class PessoaJuridicaBd extends BD{
 	// BUSCAR UMA PESSOA
 	public void buscarPessoa(String n) {
 		int teste = 0;
-		for (String chave : mapPessoas.keySet()) { // Criar um conjunto de elementos-chave contidos no mapa
-			Pessoa a = mapPessoas.get(chave); // a recebe o 1 elemento do conjunto de chaves
-			if(a.nome.contains(n)) { // Se a palavra digitada contem nas chaves do map
+		 // Criar um conjunto de elementos-chave contidos no mapa
+		for (String chave : mapPessoas.keySet()) {
+			// O a recebe o 1 elemento do conjunto de chaves
+			Pessoa a = mapPessoas.get(chave);
+			// Se a palavra digitada contem nas chaves do map
+			if(a.nome.contains(n)) {
 				System.out.println("\n > Nome: "+mapPessoas.get(chave).nome);
 				mapPessoas.get(chave).listarTelefones();
 				System.out.println(" > CNPJ: "+mapPessoas.get(chave).documento.numero);
@@ -166,7 +169,7 @@ public class PessoaJuridicaBd extends BD{
 		if(p.size() != 0) {
 			return true;
 		}else {
-			System.out.println("\n ----------- Lista Vazia ---------- ");
+			System.out.println(" ----------- Lista Vazia ---------- ");
 			return false;
 		}
 	}
