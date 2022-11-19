@@ -27,7 +27,7 @@ public class PessoaFisicaBd extends BD{
 			
 			p.telefones.get(escolhido).numero = iu.sc.next();			
 		}else {
-			System.out.println("\n ----- Telefone invalido ----- ");
+			System.out.println("\n ------- Telefone invalido -------- \n");
 		}
 	}
 	// EDITAR PESSOA FISICA
@@ -42,7 +42,13 @@ public class PessoaFisicaBd extends BD{
 			editarTelefone(listaPessoas.get(e));
 			
 			System.out.print(" - CPF: ");
-			listaPessoas.get(e).documento.numero = iu.sc.next();
+			
+			Documento umNumero = new Cpf();
+			umNumero.numero = iu.sc.next();
+			if(umNumero.validarDocumento()) {
+				listaPessoas.get(e).documento.numero = umNumero.numero;				
+			}
+			
 			System.out.print(" - Local de emissao do CPF: ");
 			listaPessoas.get(e).documento.localDeEmissao = iu.sc.next();
 			
@@ -59,6 +65,7 @@ public class PessoaFisicaBd extends BD{
 	@Override
 	public void buscarPessoa(String n) {
 		int teste = 0;
+		System.out.println(" __________________________________ ");
 		// Criar um conjunto de elementos-chave contidos no mapa
 		for (String chave : mapPessoas.keySet()) {
 			// O a recebe o 1 elemento do conjunto de chaves
@@ -71,6 +78,7 @@ public class PessoaFisicaBd extends BD{
 				System.out.println(" > Local de Emissao: "+mapPessoas.get(chave).documento.localDeEmissao);
 				System.out.println(" > Tipo de Pessoa: "+mapPessoas.get(chave).tipoDePessoa());
 				teste = 1;
+				System.out.println(" __________________________________ ");
 			}
 		}
 		if(teste != 1) {

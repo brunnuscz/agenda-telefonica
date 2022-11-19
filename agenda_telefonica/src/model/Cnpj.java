@@ -6,7 +6,7 @@ public class Cnpj extends Documento{
 		if(super.numero.length() == 18) {
 			return true;
 		}else {
-			System.out.println("\n -------- Cnpj Invalido -------- ");		
+			System.out.println("\n ---------- Cnpj Invalido --------- \n");		
 			return false;			
 		}
 	}

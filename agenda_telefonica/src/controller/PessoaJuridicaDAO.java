@@ -21,7 +21,7 @@ public class PessoaJuridicaDAO extends PessoaDAO{
 			qnt = 1;
 		}
 		for(int i=0; i < qnt; i++) {
-			System.out.print(" \t> Numero "+(i+1)+": ");
+			System.out.print(" \t - Numero "+(i+1)+": ");
 			Telefone telefone = new Telefone();
 			telefone.numero = iu.sc.next();
 			p.telefones.add(telefone);
@@ -48,14 +48,14 @@ public class PessoaJuridicaDAO extends PessoaDAO{
 		Documento umCpf = new Cpf();
 		
 		System.out.print("\n - Responsavel: ");
-		System.out.print("\n  - Nome: ");
+		System.out.print("\n   - Nome: ");
 		responsavel.nome = iu.sc.next();
 		
 		adicionarTelefone(responsavel);
 		
-		System.out.print("  - CPF: ");
+		System.out.print("   - CPF: ");
 		umCpf.numero = iu.sc.next();
-		System.out.print("  - Local de emissao do CPF: ");
+		System.out.print("   - Local de emissao do CPF: ");
 		umCpf.localDeEmissao = iu.sc.next();
 	
 		responsavel.documento = umCpf;

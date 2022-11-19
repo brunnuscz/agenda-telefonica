@@ -26,7 +26,7 @@ public class PessoaJuridicaBd extends BD{
 			
 			p.telefones.get(escolhido).numero = iu.sc.next();			
 		}else {
-			System.out.println("\n ----- Telefone invalido ----- ");
+			System.out.println("\n ------- Telefone invalido -------- \n");
 		}
 	}
 	// EDITAR PESSOA JURIDICA
@@ -37,12 +37,17 @@ public class PessoaJuridicaBd extends BD{
 			
 			System.out.print("\n - Nome: ");
 			listaPessoas.get(e).nome = iu.sc.next();
-			System.out.print(" - Telefone: ");
 			
 			editarTelefone(listaPessoas.get(e));
 			
 			System.out.print(" - CNPJ: ");
-			listaPessoas.get(e).documento.numero = iu.sc.next();
+			
+			Documento umNumero = new Cnpj();
+			umNumero.numero = iu.sc.next();
+			if(umNumero.validarDocumento()) {
+				listaPessoas.get(e).documento.numero = umNumero.numero;				
+			}
+			
 			System.out.print(" - Local de emissao do CNPJ: ");
 			listaPessoas.get(e).documento.localDeEmissao = iu.sc.next();
 			
@@ -50,12 +55,17 @@ public class PessoaJuridicaBd extends BD{
 			System.out.print("\n - Responsavel: ");
 			System.out.print("\n  - Nome: ");
 			listaPessoas.get(e).getPessoa().nome = iu.sc.next();
-			System.out.print("  - Telefone: ");
 			
 			editarTelefone(listaPessoas.get(e).getPessoa());
 			
 			System.out.print("  - CPF: ");
-			listaPessoas.get(e).getPessoa().documento.numero = iu.sc.next();
+			
+			Documento outroNumero = new Cpf();
+			outroNumero.numero = iu.sc.next();
+			if(outroNumero.validarDocumento()) {
+				listaPessoas.get(e).getPessoa().documento.numero = outroNumero.numero;				
+			}
+			
 			System.out.print("  - Local de emissao do CPF: ");
 			listaPessoas.get(e).getPessoa().documento.localDeEmissao = iu.sc.next();
 			
@@ -70,6 +80,7 @@ public class PessoaJuridicaBd extends BD{
 	// BUSCAR UMA PESSOA
 	public void buscarPessoa(String n) {
 		int teste = 0;
+		System.out.println(" __________________________________ ");
 		 // Criar um conjunto de elementos-chave contidos no mapa
 		for (String chave : mapPessoas.keySet()) {
 			// O a recebe o 1 elemento do conjunto de chaves
@@ -82,12 +93,13 @@ public class PessoaJuridicaBd extends BD{
 				System.out.println(" > Local de Emissao: "+mapPessoas.get(chave).documento.localDeEmissao);
 				System.out.println(" > Tipo de Pessoa: "+mapPessoas.get(chave).tipoDePessoa());
 				System.out.println(" > Responsavel: ");
-				System.out.println(" - Nome: "+mapPessoas.get(chave).getPessoa().nome);
+				System.out.println(" + Nome: "+mapPessoas.get(chave).getPessoa().nome);
 				mapPessoas.get(chave).getPessoa().listarTelefones();
-				System.out.println(" - CPF: "+mapPessoas.get(chave).getPessoa().documento.numero);		
-				System.out.println(" - Local de emissao da CPF: "+mapPessoas.get(chave).getPessoa().documento.localDeEmissao);					
-				System.out.println(" - Tipo de Pessoa: "+mapPessoas.get(chave).getPessoa().tipoDePessoa());
+				System.out.println(" + CPF: "+mapPessoas.get(chave).getPessoa().documento.numero);		
+				System.out.println(" + Local de emissao da CPF: "+mapPessoas.get(chave).getPessoa().documento.localDeEmissao);					
+				System.out.println(" + Tipo de Pessoa: "+mapPessoas.get(chave).getPessoa().tipoDePessoa());
 				teste = 1;
+				System.out.println(" __________________________________ ");
 			}
 		}
 		if(teste != 1) {
@@ -105,11 +117,11 @@ public class PessoaJuridicaBd extends BD{
 				System.out.println(" > Local de emissao da CPF: "+listaPessoas.get(i).documento.localDeEmissao);					
 				System.out.println(" > Tipo de Pessoa: "+listaPessoas.get(i).tipoDePessoa());
 				System.out.println(" > Responsavel: ");
-				System.out.println(" - Nome: "+listaPessoas.get(i).getPessoa().nome);
+				System.out.println(" + Nome: "+listaPessoas.get(i).getPessoa().nome);
 				listaPessoas.get(i).getPessoa().listarTelefones();
-				System.out.println(" - CPF: "+listaPessoas.get(i).getPessoa().documento.numero);		
-				System.out.println(" - Local de emissao da CPF: "+listaPessoas.get(i).getPessoa().documento.localDeEmissao);					
-				System.out.println(" - Tipo de Pessoa: "+listaPessoas.get(i).getPessoa().tipoDePessoa());
+				System.out.println(" + CPF: "+listaPessoas.get(i).getPessoa().documento.numero);		
+				System.out.println(" + Local de emissao da CPF: "+listaPessoas.get(i).getPessoa().documento.localDeEmissao);					
+				System.out.println(" + Tipo de Pessoa: "+listaPessoas.get(i).getPessoa().tipoDePessoa());
 			}
 			System.out.println(" __________________________________ ");
 			return true;
@@ -127,11 +139,11 @@ public class PessoaJuridicaBd extends BD{
 				System.out.println(" > Local de emissao da CPF: "+pessoasRemovidas.get(i).documento.localDeEmissao);					
 				System.out.println(" > Tipo de Pessoa: "+pessoasRemovidas.get(i).tipoDePessoa());
 				System.out.println(" > Responsavel: ");
-				System.out.println(" - Nome: "+pessoasRemovidas.get(i).getPessoa().nome);
+				System.out.println(" + Nome: "+pessoasRemovidas.get(i).getPessoa().nome);
 				pessoasRemovidas.get(i).getPessoa().listarTelefones();
-				System.out.println(" - CPF: "+pessoasRemovidas.get(i).getPessoa().documento.numero);		
-				System.out.println(" - Local de emissao da CPF: "+pessoasRemovidas.get(i).getPessoa().documento.localDeEmissao);					
-				System.out.println(" - Tipo de Pessoa: "+pessoasRemovidas.get(i).getPessoa().tipoDePessoa());
+				System.out.println(" + CPF: "+pessoasRemovidas.get(i).getPessoa().documento.numero);		
+				System.out.println(" + Local de emissao da CPF: "+pessoasRemovidas.get(i).getPessoa().documento.localDeEmissao);					
+				System.out.println(" + Tipo de Pessoa: "+pessoasRemovidas.get(i).getPessoa().tipoDePessoa());
 			}
 			System.out.println(" __________________________________ ");
 			return true;

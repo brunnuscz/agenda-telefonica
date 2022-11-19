@@ -7,7 +7,7 @@ public class Cpf extends Documento{
 		if(super.numero.length() == 14) {
 			return true;
 		}else {
-			System.out.println("\n -------- Cpf Invalido -------- ");
+			System.out.println("\n ---------- Cpf Invalido ---------- \n");
 			return false;			
 		}
 	}
