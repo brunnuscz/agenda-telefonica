@@ -1,42 +1,52 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import view.InterfaceUsuario;
 
-public class PessoaFisicaBd{
-	public ArrayList<PessoaFisica> pessoasFisicas = new ArrayList<PessoaFisica>();
-	public ArrayList<PessoaFisica> pessoasFisicasRemovidas = new ArrayList<PessoaFisica>();
-	Map<String, PessoaFisica> mapPessoasFisicas = new LinkedHashMap<String, PessoaFisica>();
-	InterfaceUsuario iu = new InterfaceUsuario();
-	
+public class PessoaFisicaBd extends BD{
+
 	// ADICIONAR PESSOA FISICA
-	public boolean adicionarPessoa(PessoaFisica p) {
+	@Override
+	public boolean adicionarPessoa(Pessoa p) {
 		if(verificarNome(p) && p.documento.validarDocumento()) {
-			pessoasFisicas.add(p);
-			mapPessoasFisicas.put(p.nome, p);
+			listaPessoas.add(p);
+			mapPessoas.put(p.nome, p);
 			System.out.println("\n ----- Pessoa Salva com Exito ----- ");			
 			return true;
 		}else {
 			return false;
 		}
 	}
+	// EDITAR UM TELEFONE ESCOLHIDO DA LISTA
+	@Override
+	public void editarTelefone(Pessoa p) {
+		p.listarTelefones();
+		System.out.print(" - Qual numero deseja editar: ");
+		int escolhido = iu.sc.nextInt()-1;
+		if(escolhido >= 0 && escolhido < p.telefones.size()) {
+			System.out.print(" - Editar numero "+(escolhido+1)+": ");
+			
+			p.telefones.get(escolhido).numero = iu.sc.next();			
+		}else {
+			System.out.println("\n ----- Telefone invalido ----- ");
+		}
+	}
 	// EDITAR PESSOA FISICA
+	@Override
 	public boolean editarPessoa(int e) {
-		if(e >= 0 && e < pessoasFisicas.size()) {
-			mapPessoasFisicas.remove(pessoasFisicas.get(e).nome);
+		if(e >= 0 && e < listaPessoas.size()) {
+			mapPessoas.remove(listaPessoas.get(e).nome);
 			
 			System.out.print("\n - Nome: ");
-			pessoasFisicas.get(e).nome = iu.sc.next();
-			System.out.print(" - Telefone: ");
-			pessoasFisicas.get(e).telefone = iu.sc.next();
-			System.out.print(" - CPF: ");
-			pessoasFisicas.get(e).documento.numero = iu.sc.next();
-			System.out.print(" - Local de emissao do CPF: ");
-			pessoasFisicas.get(e).documento.localDeEmissao = iu.sc.next();
+			listaPessoas.get(e).nome = iu.sc.next();
 			
-			mapPessoasFisicas.put(pessoasFisicas.get(e).nome, pessoasFisicas.get(e));
+			editarTelefone(listaPessoas.get(e));
+			
+			System.out.print(" - CPF: ");
+			listaPessoas.get(e).documento.numero = iu.sc.next();
+			System.out.print(" - Local de emissao do CPF: ");
+			listaPessoas.get(e).documento.localDeEmissao = iu.sc.next();
+			
+			mapPessoas.put(listaPessoas.get(e).nome, listaPessoas.get(e));
 			
 			System.out.println("\n ----- Pessoa Salva com Exito ----- ");			
 			return true;
@@ -46,16 +56,20 @@ public class PessoaFisicaBd{
 		}
 	}
 	// BUSCAR POR UM CARACTERE OU PALAVRA, SE EXISTE NO MAP DE PESSOAS FISICAS
+	@Override
 	public void buscarPessoa(String n) {
 		int teste = 0;
-		for (String chave : mapPessoasFisicas.keySet()) { // Criar um conjunto de elementos-chave contidos no mapa
-			PessoaFisica a = mapPessoasFisicas.get(chave); // a recebe o 1 elemento do conjunto de chaves
-			if(a.nome.contains(n)) { // Se a palavra digitada contem nas chaves do map
-				System.out.println("\n > Nome: "+mapPessoasFisicas.get(chave).nome); 
-				System.out.println(" > Telefone: "+mapPessoasFisicas.get(chave).telefone);
-				System.out.println(" > CPF: "+mapPessoasFisicas.get(chave).documento.numero);
-				System.out.println(" > Local de Emissao: "+mapPessoasFisicas.get(chave).documento.localDeEmissao);
-				System.out.println(" > Tipo de Pessoa: "+mapPessoasFisicas.get(chave).tipoDePessoa());
+		// Criar um conjunto de elementos-chave contidos no mapa
+		for (String chave : mapPessoas.keySet()) {
+			// a recebe o 1 elemento do conjunto de chaves
+			Pessoa a = mapPessoas.get(chave);
+			// Se a palavra digitada contem nas chaves do map
+			if(a.nome.contains(n)) {
+				System.out.println("\n > Nome: "+mapPessoas.get(chave).nome); 
+				mapPessoas.get(chave).listarTelefones();;
+				System.out.println(" > CPF: "+mapPessoas.get(chave).documento.numero);
+				System.out.println(" > Local de Emissao: "+mapPessoas.get(chave).documento.localDeEmissao);
+				System.out.println(" > Tipo de Pessoa: "+mapPessoas.get(chave).tipoDePessoa());
 				teste = 1;
 			}
 		}
@@ -64,15 +78,16 @@ public class PessoaFisicaBd{
 		}
 	}
 	// LISTAR PESSOAS FISICAS
+	@Override
 	public boolean listarPessoa() {
-		if(verificarLista(pessoasFisicas)) {
-			for(int i=0; i<pessoasFisicas.size(); i++) {
+		if(verificarLista(listaPessoas)) {
+			for(int i=0; i<listaPessoas.size(); i++) {
 				System.out.println(" _____________ Pessoa "+(i+1)+" ___________ ");
-				System.out.println("\n > Nome: "+pessoasFisicas.get(i).nome);
-				System.out.println(" > Telefone: "+pessoasFisicas.get(i).telefone);
-				System.out.println(" > CPF: "+pessoasFisicas.get(i).documento.numero);		
-				System.out.println(" > Local de emissao da CPF: "+pessoasFisicas.get(i).documento.localDeEmissao);					
-				System.out.println(" > Tipo de Contato: "+pessoasFisicas.get(i).tipoDePessoa());
+				System.out.println("\n > Nome: "+listaPessoas.get(i).nome);
+				listaPessoas.get(i).listarTelefones();
+				System.out.println(" > CPF: "+listaPessoas.get(i).documento.numero);		
+				System.out.println(" > Local de emissao da CPF: "+listaPessoas.get(i).documento.localDeEmissao);					
+				System.out.println(" > Tipo de Contato: "+listaPessoas.get(i).tipoDePessoa());
 			}
 			System.out.println(" __________________________________ ");
 			return true;
@@ -80,11 +95,12 @@ public class PessoaFisicaBd{
 		return false;
 	}
 	// REMOVER PESSOA FISICA
+	@Override
 	public boolean removerPessoa(int e) {
-		if(e >= 0 && e < pessoasFisicas.size()) {
-			pessoasFisicasRemovidas.add(pessoasFisicas.get(e));			
-			mapPessoasFisicas.remove(pessoasFisicas.get(e).nome);
-			pessoasFisicas.remove(e);
+		if(e >= 0 && e < listaPessoas.size()) {
+			pessoasRemovidas.add(listaPessoas.get(e));			
+			mapPessoas.remove(listaPessoas.get(e).nome);
+			listaPessoas.remove(e);
 			System.out.println("\n ---- Pessoa Removida com Exito --- ");	
 			return true;
 		}else {
@@ -93,11 +109,12 @@ public class PessoaFisicaBd{
 		return false;
 	}
 	// RESTAURAR DA LIXEIRA UMA PESSOA FISICA
+	@Override
 	public boolean restaurarPessoa(int e) {
-		if(e >= 0 && e < pessoasFisicasRemovidas.size()) {
-			pessoasFisicas.add(pessoasFisicasRemovidas.get(e));
-			mapPessoasFisicas.put(pessoasFisicasRemovidas.get(e).nome, pessoasFisicasRemovidas.get(e));		
-			pessoasFisicasRemovidas.remove(e);
+		if(e >= 0 && e < pessoasRemovidas.size()) {
+			listaPessoas.add(pessoasRemovidas.get(e));
+			mapPessoas.put(pessoasRemovidas.get(e).nome, pessoasRemovidas.get(e));		
+			pessoasRemovidas.remove(e);
 			System.out.println("\n --- Pessoa Restaurada com Exito -- ");
 			return true;
 		}else {
@@ -106,15 +123,16 @@ public class PessoaFisicaBd{
 		return false;
 	}
 	// LISTAR PESSOAS QUE ESTÃO NA LIXEIRA
+	@Override
 	public boolean listarPessoaRemovida() {
-		if(verificarLista(pessoasFisicasRemovidas)) {
-			for(int i=0; i<pessoasFisicasRemovidas.size(); i++) {
+		if(verificarLista(pessoasRemovidas)) {
+			for(int i=0; i<pessoasRemovidas.size(); i++) {
 				System.out.println("_________ Pessoa Removida "+(i+1)+" _______");
-				System.out.println("\n > Nome: "+pessoasFisicasRemovidas.get(i).nome);
-				System.out.println(" > Telefone: "+pessoasFisicasRemovidas.get(i).telefone);
-				System.out.println(" > CPF: "+pessoasFisicasRemovidas.get(i).documento.numero);		
-				System.out.println(" > Local de emissao da CPF: "+pessoasFisicasRemovidas.get(i).documento.localDeEmissao);					
-				System.out.println(" > Tipo de Contato: "+pessoasFisicasRemovidas.get(i).tipoDePessoa());
+				System.out.println("\n > Nome: "+pessoasRemovidas.get(i).nome);
+				pessoasRemovidas.get(i).listarTelefones();
+				System.out.println(" > CPF: "+pessoasRemovidas.get(i).documento.numero);		
+				System.out.println(" > Local de emissao da CPF: "+pessoasRemovidas.get(i).documento.localDeEmissao);					
+				System.out.println(" > Tipo de Contato: "+pessoasRemovidas.get(i).tipoDePessoa());
 			}
 			System.out.println(" __________________________________ ");
 			return true;
@@ -122,7 +140,8 @@ public class PessoaFisicaBd{
 		return false;
 	}
 	// VERIFICAR SE A LISTA PASSADA ESTÁ VAZIA
-	public boolean verificarLista(ArrayList<PessoaFisica> p) {
+	@Override
+	public boolean verificarLista(ArrayList<Pessoa> p) {
 		if(p.size() != 0) {
 			return true;
 		}else {
@@ -131,9 +150,10 @@ public class PessoaFisicaBd{
 		}
 	}
 	// VERIFICAR SE O EXISTE ALGUM NOME NA LISTA DE PESSOAS SALVAS IGUAL AO NOME PASSADO
-	public boolean verificarNome(PessoaFisica p) {
-		for(int i=0; i<pessoasFisicas.size(); i++) {
-			if(pessoasFisicas.get(i).nome.equals(p.nome)) {
+	@Override
+	public boolean verificarNome(Pessoa p) {
+		for(int i=0; i<listaPessoas.size(); i++) {
+			if(listaPessoas.get(i).nome.equals(p.nome)) {
 				System.out.println("\n -- Ja Existe Esse Nome na Lista -- ");
 				return false;				
 			}

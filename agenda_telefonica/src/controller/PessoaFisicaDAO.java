@@ -1,22 +1,42 @@
 package controller;
 
 import model.PessoaFisicaBd;
+import model.Telefone;
+import model.BD;
 import model.Cpf;
 import model.Documento;
+import model.Pessoa;
 import model.PessoaFisica;
 
 public class PessoaFisicaDAO extends PessoaDAO{
-	public PessoaFisicaBd pessoaFisicaBd = new PessoaFisicaBd();
+	
+	public BD pessoaFisicaBd = new PessoaFisicaBd();
+	
+	@Override
+	public void adicionarTelefone(Pessoa p) {
+		System.out.print(" - Quantos numeros deseja salvar: ");
+		int qnt = iu.sc.nextInt();
+		if(qnt < 1) {
+			qnt = 1;
+		}
+		for(int i=0; i < qnt; i++) {
+			System.out.print(" \t> Numero "+(i+1)+": ");
+			Telefone telefone = new Telefone();
+			telefone.numero = iu.sc.next();
+			p.telefones.add(telefone);
+		}			
+	}
 	
 	@Override
 	public void adicionar() {
-		PessoaFisica pessoa = new PessoaFisica();
+		Pessoa pessoa = new PessoaFisica();
 		Documento umCpf = new Cpf();
 		
 		System.out.print("\n - Nome: ");
 		pessoa.nome = iu.sc.next();
-		System.out.print(" - Telefone: ");
-		pessoa.telefone = iu.sc.next();
+		
+		adicionarTelefone(pessoa);
+		
 		System.out.print(" - CPF: ");
 		umCpf.numero = iu.sc.next();
 		System.out.print(" - Local de emissao do CPF: ");
@@ -24,6 +44,14 @@ public class PessoaFisicaDAO extends PessoaDAO{
 		
 		pessoa.documento = umCpf;
 		pessoaFisicaBd.adicionarPessoa(pessoa);
+	}
+	@Override
+	public void editar() {
+		if(pessoaFisicaBd.listarPessoa()) {
+			System.out.print("\n - Qual deseja editar: ");
+			int escolhido = iu.sc.nextInt()-1;
+			pessoaFisicaBd.editarPessoa(escolhido);			
+		}
 	}
 	@Override
 	public void listar() {
@@ -50,13 +78,5 @@ public class PessoaFisicaDAO extends PessoaDAO{
 		System.out.print("\n - Qual deseja buscar: ");
 		String n = iu.sc.next();
 		pessoaFisicaBd.buscarPessoa(n);			
-	}
-	@Override
-	public void editar() {
-		if(pessoaFisicaBd.listarPessoa()) {
-			System.out.print("\n - Qual deseja editar: ");
-			int escolhido = iu.sc.nextInt()-1;
-			pessoaFisicaBd.editarPessoa(escolhido);			
-		}
 	}
 }

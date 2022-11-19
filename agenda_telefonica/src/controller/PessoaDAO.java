@@ -1,35 +1,20 @@
 package controller;
 
+import model.Pessoa;
+
 public class PessoaDAO implements DAO{
 	@Override
-	public void adicionar() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void adicionar() { }
 	@Override
-	public void buscar() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void buscar() { }
 	@Override
-	public void editar() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void editar() { }
 	@Override
-	public void listar() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void listar() { }
 	@Override
-	public void lixeira() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void lixeira() { }
 	@Override
-	public void remover() {
-		// TODO Auto-generated method stub
-		
-	}
-	
+	public void remover() { }
+	@Override
+	public void adicionarTelefone(Pessoa p) { }
 }

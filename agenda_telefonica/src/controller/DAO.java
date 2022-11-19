@@ -1,5 +1,6 @@
 package controller;
 
+import model.Pessoa;
 import view.InterfaceUsuario;
 
 public interface DAO {
@@ -11,4 +12,5 @@ public interface DAO {
 	void lixeira();
 	void buscar();
 	void editar();
+	void adicionarTelefone(Pessoa p);
 }

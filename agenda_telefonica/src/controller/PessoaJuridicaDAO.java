@@ -1,23 +1,42 @@
 package controller;
 
 import model.PessoaJuridica;
+import model.BD;
 import model.Cnpj;
 import model.Cpf;
 import model.Documento;
+import model.Pessoa;
 import model.PessoaFisica;
 import model.PessoaJuridicaBd;
+import model.Telefone;
 
 public class PessoaJuridicaDAO extends PessoaDAO{
-	public PessoaJuridicaBd pessoaJuridicaBd = new PessoaJuridicaBd();
+	public BD pessoaJuridicaBd = new PessoaJuridicaBd();
+
+	@Override
+	public void adicionarTelefone(Pessoa p) {
+		System.out.print(" - Quantos numeros deseja salvar: ");
+		int qnt = iu.sc.nextInt();
+		if(qnt < 1) {
+			qnt = 1;
+		}
+		for(int i=0; i < qnt; i++) {
+			System.out.print(" \t> Numero "+(i+1)+": ");
+			Telefone telefone = new Telefone();
+			telefone.numero = iu.sc.next();
+			p.telefones.add(telefone);
+		}			
+	}
 	@Override
 	public void adicionar() {
-		PessoaJuridica pessoa = new PessoaJuridica();
+		Pessoa pessoa = new PessoaJuridica();
 		Documento umaCnpj = new Cnpj();
 		
 		System.out.print("\n - Nome: ");
 		pessoa.nome = iu.sc.next();
-		System.out.print(" - Telefone: ");
-		pessoa.telefone = iu.sc.next();
+		
+		adicionarTelefone(pessoa);
+		
 		System.out.print(" - CNPJ: ");
 		umaCnpj.numero = iu.sc.next();
 		System.out.print(" - Local de emissao da CNPJ: ");
@@ -25,21 +44,23 @@ public class PessoaJuridicaDAO extends PessoaDAO{
 		
 		pessoa.documento = umaCnpj;
 		
-		PessoaFisica responsavel = new PessoaFisica();
+		Pessoa responsavel = new PessoaFisica();
 		Documento umCpf = new Cpf();
 		
 		System.out.print("\n - Responsavel: ");
 		System.out.print("\n  - Nome: ");
 		responsavel.nome = iu.sc.next();
-		System.out.print("  - Telefone: ");
-		responsavel.telefone = iu.sc.next();
+		
+		adicionarTelefone(responsavel);
+		
 		System.out.print("  - CPF: ");
 		umCpf.numero = iu.sc.next();
 		System.out.print("  - Local de emissao do CPF: ");
 		umCpf.localDeEmissao = iu.sc.next();
-		
+	
 		responsavel.documento = umCpf;
-		pessoa.responsavel = responsavel;
+		pessoa.setPessoa(responsavel);
+		
 		pessoaJuridicaBd.adicionarPessoa(pessoa);
 	}
 	@Override
