@@ -1,5 +1,13 @@
 package model;
 
 public class Cnpj extends Documento{
-	public String numeroCnpj;
+	@Override
+	boolean verificarQuantidadeDeNumero() {
+		if(super.numero.length() == 18) {
+			return true;
+		}else {
+			System.out.println("\n -------- Cnpj Invalido -------- ");		
+			return false;			
+		}
+	}
 }

@@ -1,5 +1,14 @@
 package model;
 
 public class Cpf extends Documento{
-	public String numeroCpf;
+	
+	@Override
+	boolean verificarQuantidadeDeNumero() {
+		if(super.numero.length() == 14) {
+			return true;
+		}else {
+			System.out.println("\n -------- Cpf Invalido -------- ");
+			return false;			
+		}
+	}
 }

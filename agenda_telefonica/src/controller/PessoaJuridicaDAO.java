@@ -3,38 +3,42 @@ package controller;
 import model.PessoaJuridica;
 import model.Cnpj;
 import model.Cpf;
+import model.Documento;
 import model.PessoaFisica;
 import model.PessoaJuridicaBd;
 
-public class PessoaJuridicaDAO implements DAO{
+public class PessoaJuridicaDAO extends PessoaDAO{
 	public PessoaJuridicaBd pessoaJuridicaBd = new PessoaJuridicaBd();
 	@Override
 	public void adicionar() {
 		PessoaJuridica pessoa = new PessoaJuridica();
-		Cnpj umaCnpj = new Cnpj();
+		Documento umaCnpj = new Cnpj();
+		
 		System.out.print("\n - Nome: ");
 		pessoa.nome = iu.sc.next();
 		System.out.print(" - Telefone: ");
 		pessoa.telefone = iu.sc.next();
 		System.out.print(" - CNPJ: ");
-		umaCnpj.numeroCnpj = iu.sc.next();
+		umaCnpj.numero = iu.sc.next();
 		System.out.print(" - Local de emissao da CNPJ: ");
 		umaCnpj.localDeEmissao = iu.sc.next();
-		pessoa.cnpj = umaCnpj;
+		
+		pessoa.documento = umaCnpj;
 		
 		PessoaFisica responsavel = new PessoaFisica();
-		Cpf umCpf = new Cpf();
+		Documento umCpf = new Cpf();
+		
 		System.out.print("\n - Responsavel: ");
 		System.out.print("\n  - Nome: ");
 		responsavel.nome = iu.sc.next();
 		System.out.print("  - Telefone: ");
 		responsavel.telefone = iu.sc.next();
 		System.out.print("  - CPF: ");
-		umCpf.numeroCpf = iu.sc.next();
+		umCpf.numero = iu.sc.next();
 		System.out.print("  - Local de emissao do CPF: ");
 		umCpf.localDeEmissao = iu.sc.next();
-		responsavel.cpf = umCpf;
 		
+		responsavel.documento = umCpf;
 		pessoa.responsavel = responsavel;
 		pessoaJuridicaBd.adicionarPessoa(pessoa);
 	}

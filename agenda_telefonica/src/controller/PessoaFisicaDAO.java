@@ -2,25 +2,27 @@ package controller;
 
 import model.PessoaFisicaBd;
 import model.Cpf;
+import model.Documento;
 import model.PessoaFisica;
 
-public class PessoaFisicaDAO implements DAO{
+public class PessoaFisicaDAO extends PessoaDAO{
 	public PessoaFisicaBd pessoaFisicaBd = new PessoaFisicaBd();
 	
 	@Override
 	public void adicionar() {
 		PessoaFisica pessoa = new PessoaFisica();
-		Cpf umCpf = new Cpf();
+		Documento umCpf = new Cpf();
+		
 		System.out.print("\n - Nome: ");
 		pessoa.nome = iu.sc.next();
 		System.out.print(" - Telefone: ");
 		pessoa.telefone = iu.sc.next();
 		System.out.print(" - CPF: ");
-		umCpf.numeroCpf = iu.sc.next();
+		umCpf.numero = iu.sc.next();
 		System.out.print(" - Local de emissao do CPF: ");
 		umCpf.localDeEmissao = iu.sc.next();
-		pessoa.cpf = umCpf;
 		
+		pessoa.documento = umCpf;
 		pessoaFisicaBd.adicionarPessoa(pessoa);
 	}
 	@Override

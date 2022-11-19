@@ -12,7 +12,7 @@ public class PessoaJuridicaBd{
 	InterfaceUsuario iu = new InterfaceUsuario();
 	
 	public boolean adicionarPessoa(PessoaJuridica p) {
-		if(verificarNome(p)) {
+		if(verificarNome(p) && p.documento.validarDocumento() && p.responsavel.documento.validarDocumento()) {
 			pessoasJuridicas.add(p);
 			mapPessoasJuridicas.put(p.nome, p);	
 			System.out.println("\n ----- Pessoa Salva com Exito ----- ");		
@@ -31,9 +31,9 @@ public class PessoaJuridicaBd{
 			System.out.print(" - Telefone: ");
 			pessoasJuridicas.get(e).telefone = iu.sc.next();
 			System.out.print(" - CNPJ: ");
-			pessoasJuridicas.get(e).cnpj.numeroCnpj = iu.sc.next();
+			pessoasJuridicas.get(e).documento.numero = iu.sc.next();
 			System.out.print(" - Local de emissao do CNPJ: ");
-			pessoasJuridicas.get(e).cnpj.localDeEmissao = iu.sc.next();
+			pessoasJuridicas.get(e).documento.localDeEmissao = iu.sc.next();
 			
 			
 			System.out.print("\n - Responsavel: ");
@@ -42,9 +42,9 @@ public class PessoaJuridicaBd{
 			System.out.print("  - Telefone: ");
 			pessoasJuridicas.get(e).responsavel.telefone = iu.sc.next();
 			System.out.print("  - CPF: ");
-			pessoasJuridicas.get(e).responsavel.cpf.numeroCpf = iu.sc.next();
+			pessoasJuridicas.get(e).responsavel.documento.numero = iu.sc.next();
 			System.out.print("  - Local de emissao do CPF: ");
-			pessoasJuridicas.get(e).responsavel.cpf.localDeEmissao = iu.sc.next();
+			pessoasJuridicas.get(e).responsavel.documento.localDeEmissao = iu.sc.next();
 			
 			mapPessoasJuridicas.put(pessoasJuridicas.get(e).nome, pessoasJuridicas.get(e));
 			System.out.println("\n ----- Pessoa Salva com Exito ----- ");			
@@ -61,15 +61,15 @@ public class PessoaJuridicaBd{
 			if(a.nome.contains(n)) { // Se a palavra digitada contem nas chaves do map
 				System.out.println("\n > Nome: "+mapPessoasJuridicas.get(chave).nome); 
 				System.out.println(" > Telefone: "+mapPessoasJuridicas.get(chave).telefone);
-				System.out.println(" > CNPJ: "+mapPessoasJuridicas.get(chave).cnpj.numeroCnpj);
-				System.out.println(" > Local de Emissao: "+mapPessoasJuridicas.get(chave).cnpj.localDeEmissao);
+				System.out.println(" > CNPJ: "+mapPessoasJuridicas.get(chave).documento.numero);
+				System.out.println(" > Local de Emissao: "+mapPessoasJuridicas.get(chave).documento.localDeEmissao);
 				System.out.println(" > Tipo de Pessoa: "+mapPessoasJuridicas.get(chave).tipoDePessoa());
 				System.out.println(" > Responsavel: ");
 				System.out.println(" - Nome: "+mapPessoasJuridicas.get(chave).responsavel.nome);
 				System.out.println(" - Telefone: "+mapPessoasJuridicas.get(chave).telefone);
-				System.out.println(" - CPF: "+mapPessoasJuridicas.get(chave).responsavel.cpf.numeroCpf);		
-				System.out.println(" - Local de emissao da CPF: "+mapPessoasJuridicas.get(chave).responsavel.cpf.localDeEmissao);					
-				System.out.println(" - Tipo de Contato: "+mapPessoasJuridicas.get(chave).responsavel.tipoDePessoa());
+				System.out.println(" - CPF: "+mapPessoasJuridicas.get(chave).responsavel.documento.numero);		
+				System.out.println(" - Local de emissao da CPF: "+mapPessoasJuridicas.get(chave).responsavel.documento.localDeEmissao);					
+				System.out.println(" - Tipo de Pessoa: "+mapPessoasJuridicas.get(chave).responsavel.tipoDePessoa());
 				teste = 1;
 			}
 		}
@@ -83,15 +83,15 @@ public class PessoaJuridicaBd{
 				System.out.println(" _____________ Pessoa "+(i+1)+" ___________ ");
 				System.out.println("\n > Nome: "+pessoasJuridicas.get(i).nome);
 				System.out.println(" > Telefone: "+pessoasJuridicas.get(i).telefone);
-				System.out.println(" > CPF: "+pessoasJuridicas.get(i).cnpj.numeroCnpj);		
-				System.out.println(" > Local de emissao da CPF: "+pessoasJuridicas.get(i).cnpj.localDeEmissao);					
-				System.out.println(" > Tipo de Contato: "+pessoasJuridicas.get(i).tipoDePessoa());
+				System.out.println(" > CPF: "+pessoasJuridicas.get(i).documento.numero);		
+				System.out.println(" > Local de emissao da CPF: "+pessoasJuridicas.get(i).documento.localDeEmissao);					
+				System.out.println(" > Tipo de Pessoa: "+pessoasJuridicas.get(i).tipoDePessoa());
 				System.out.println(" > Responsavel: ");
 				System.out.println(" - Nome: "+pessoasJuridicas.get(i).responsavel.nome);
 				System.out.println(" - Telefone: "+pessoasJuridicas.get(i).telefone);
-				System.out.println(" - CPF: "+pessoasJuridicas.get(i).responsavel.cpf.numeroCpf);		
-				System.out.println(" - Local de emissao da CPF: "+pessoasJuridicas.get(i).responsavel.cpf.localDeEmissao);					
-				System.out.println(" - Tipo de Contato: "+pessoasJuridicas.get(i).responsavel.tipoDePessoa());
+				System.out.println(" - CPF: "+pessoasJuridicas.get(i).responsavel.documento.numero);		
+				System.out.println(" - Local de emissao da CPF: "+pessoasJuridicas.get(i).responsavel.documento.localDeEmissao);					
+				System.out.println(" - Tipo de Pessoa: "+pessoasJuridicas.get(i).responsavel.tipoDePessoa());
 			}
 			System.out.println(" __________________________________ ");
 			return true;
@@ -104,15 +104,15 @@ public class PessoaJuridicaBd{
 				System.out.println("\n _________ Pessoa Removida "+(i+1)+" ______ ");
 				System.out.println("\n > Nome: "+pessoasJuridicasRemovidas.get(i).nome);
 				System.out.println(" > Telefone: "+pessoasJuridicasRemovidas.get(i).telefone);
-				System.out.println(" > CPF: "+pessoasJuridicasRemovidas.get(i).cnpj.numeroCnpj);		
-				System.out.println(" > Local de emissao da CPF: "+pessoasJuridicasRemovidas.get(i).cnpj.localDeEmissao);					
-				System.out.println(" > Tipo de Contato: "+pessoasJuridicasRemovidas.get(i).tipoDePessoa());
+				System.out.println(" > CPF: "+pessoasJuridicasRemovidas.get(i).documento.numero);		
+				System.out.println(" > Local de emissao da CPF: "+pessoasJuridicasRemovidas.get(i).documento.localDeEmissao);					
+				System.out.println(" > Tipo de Pessoa: "+pessoasJuridicasRemovidas.get(i).tipoDePessoa());
 				System.out.println(" > Responsavel: ");
 				System.out.println(" - Nome: "+pessoasJuridicasRemovidas.get(i).responsavel.nome);
 				System.out.println(" - Telefone: "+pessoasJuridicasRemovidas.get(i).telefone);
-				System.out.println(" - CPF: "+pessoasJuridicasRemovidas.get(i).responsavel.cpf.numeroCpf);		
-				System.out.println(" - Local de emissao da CPF: "+pessoasJuridicasRemovidas.get(i).responsavel.cpf.localDeEmissao);					
-				System.out.println(" - Tipo de Contato: "+pessoasJuridicasRemovidas.get(i).responsavel.tipoDePessoa());
+				System.out.println(" - CPF: "+pessoasJuridicasRemovidas.get(i).responsavel.documento.numero);		
+				System.out.println(" - Local de emissao da CPF: "+pessoasJuridicasRemovidas.get(i).responsavel.documento.localDeEmissao);					
+				System.out.println(" - Tipo de Pessoa: "+pessoasJuridicasRemovidas.get(i).responsavel.tipoDePessoa());
 			}
 			System.out.println(" __________________________________ ");
 			return true;

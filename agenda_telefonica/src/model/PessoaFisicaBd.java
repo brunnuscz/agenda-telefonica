@@ -13,7 +13,7 @@ public class PessoaFisicaBd{
 	
 	// ADICIONAR PESSOA FISICA
 	public boolean adicionarPessoa(PessoaFisica p) {
-		if(verificarNome(p)) {
+		if(verificarNome(p) && p.documento.validarDocumento()) {
 			pessoasFisicas.add(p);
 			mapPessoasFisicas.put(p.nome, p);
 			System.out.println("\n ----- Pessoa Salva com Exito ----- ");			
@@ -32,9 +32,9 @@ public class PessoaFisicaBd{
 			System.out.print(" - Telefone: ");
 			pessoasFisicas.get(e).telefone = iu.sc.next();
 			System.out.print(" - CPF: ");
-			pessoasFisicas.get(e).cpf.numeroCpf = iu.sc.next();
+			pessoasFisicas.get(e).documento.numero = iu.sc.next();
 			System.out.print(" - Local de emissao do CPF: ");
-			pessoasFisicas.get(e).cpf.localDeEmissao = iu.sc.next();
+			pessoasFisicas.get(e).documento.localDeEmissao = iu.sc.next();
 			
 			mapPessoasFisicas.put(pessoasFisicas.get(e).nome, pessoasFisicas.get(e));
 			
@@ -53,8 +53,8 @@ public class PessoaFisicaBd{
 			if(a.nome.contains(n)) { // Se a palavra digitada contem nas chaves do map
 				System.out.println("\n > Nome: "+mapPessoasFisicas.get(chave).nome); 
 				System.out.println(" > Telefone: "+mapPessoasFisicas.get(chave).telefone);
-				System.out.println(" > CPF: "+mapPessoasFisicas.get(chave).cpf.numeroCpf);
-				System.out.println(" > Local de Emissao: "+mapPessoasFisicas.get(chave).cpf.localDeEmissao);
+				System.out.println(" > CPF: "+mapPessoasFisicas.get(chave).documento.numero);
+				System.out.println(" > Local de Emissao: "+mapPessoasFisicas.get(chave).documento.localDeEmissao);
 				System.out.println(" > Tipo de Pessoa: "+mapPessoasFisicas.get(chave).tipoDePessoa());
 				teste = 1;
 			}
@@ -70,8 +70,8 @@ public class PessoaFisicaBd{
 				System.out.println(" _____________ Pessoa "+(i+1)+" ___________ ");
 				System.out.println("\n > Nome: "+pessoasFisicas.get(i).nome);
 				System.out.println(" > Telefone: "+pessoasFisicas.get(i).telefone);
-				System.out.println(" > CPF: "+pessoasFisicas.get(i).cpf.numeroCpf);		
-				System.out.println(" > Local de emissao da CPF: "+pessoasFisicas.get(i).cpf.localDeEmissao);					
+				System.out.println(" > CPF: "+pessoasFisicas.get(i).documento.numero);		
+				System.out.println(" > Local de emissao da CPF: "+pessoasFisicas.get(i).documento.localDeEmissao);					
 				System.out.println(" > Tipo de Contato: "+pessoasFisicas.get(i).tipoDePessoa());
 			}
 			System.out.println(" __________________________________ ");
@@ -109,11 +109,11 @@ public class PessoaFisicaBd{
 	public boolean listarPessoaRemovida() {
 		if(verificarLista(pessoasFisicasRemovidas)) {
 			for(int i=0; i<pessoasFisicasRemovidas.size(); i++) {
-				System.out.println("__________ Pessoa Removida "+(i+1)+" ________");
+				System.out.println("_________ Pessoa Removida "+(i+1)+" _______");
 				System.out.println("\n > Nome: "+pessoasFisicasRemovidas.get(i).nome);
 				System.out.println(" > Telefone: "+pessoasFisicasRemovidas.get(i).telefone);
-				System.out.println(" > CPF: "+pessoasFisicasRemovidas.get(i).cpf.numeroCpf);		
-				System.out.println(" > Local de emissao da CPF: "+pessoasFisicasRemovidas.get(i).cpf.localDeEmissao);					
+				System.out.println(" > CPF: "+pessoasFisicasRemovidas.get(i).documento.numero);		
+				System.out.println(" > Local de emissao da CPF: "+pessoasFisicasRemovidas.get(i).documento.localDeEmissao);					
 				System.out.println(" > Tipo de Contato: "+pessoasFisicasRemovidas.get(i).tipoDePessoa());
 			}
 			System.out.println(" __________________________________ ");

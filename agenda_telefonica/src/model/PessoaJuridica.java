@@ -1,8 +1,7 @@
 package model;
 
 public class PessoaJuridica extends Pessoa{
-	public Cnpj cnpj;
-	public PessoaFisica responsavel = new PessoaFisica();
+	public PessoaFisica responsavel;
 
 	@Override
 	public String tipoDePessoa() {
