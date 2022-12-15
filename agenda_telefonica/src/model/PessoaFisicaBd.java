@@ -127,8 +127,8 @@ public class PessoaFisicaBd extends BD{
 			return true;
 		}else {
 			System.out.println("\n ------ Pessoa Nao Encontrada ----- ");
+			return false;
 		}
-		return false;
 	}
 	// LISTAR PESSOAS QUE ESTÃO NA LIXEIRA
 	@Override

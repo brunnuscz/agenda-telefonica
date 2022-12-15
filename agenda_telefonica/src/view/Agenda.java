@@ -1,11 +1,7 @@
 package view;
 
-import model.Operacao;
-
 public class Agenda {
 	public InterfaceUsuario iu = new InterfaceUsuario();
-	
-	public Operacao operacao = new Operacao();
 	
 	public void escolherOperacao() { }
 	

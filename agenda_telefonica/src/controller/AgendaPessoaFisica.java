@@ -1,46 +1,59 @@
 package controller;
 
-import java.util.ArrayList;
+import view.Agenda;
 
-import model.Cpf;
-import model.PessoaFisica;
-
-public class AgendaPessoaFisica implements DAO{
-	public ArrayList<PessoaFisica> pessoasFisicas = new ArrayList<PessoaFisica>();
-	
+public class AgendaPessoaFisica extends Agenda{
+	public DAO pFDAO = new PessoaFisicaDAO();
 	@Override
-	public void adicionarPessoa() {
-		PessoaFisica contato = new PessoaFisica();
-		Cpf umCpf = new Cpf();
-		
-		System.out.print("\n- Nome: ");
-		contato.nome = iu.sc.next();
-		System.out.print("- Telefone: ");
-		contato.telefone = iu.sc.next();
-		
-		System.out.print("- CPF: ");
-		umCpf.numeroCpf = iu.sc.next();
-		System.out.print("- Local de emissao do CPF: ");
-		umCpf.localDeEmissao = iu.sc.next();
-
-		contato.cpf = umCpf;
-		
-		pessoasFisicas.add(contato);
-	}
-	@Override
-	public void listarPessoa() {
-		if(pessoasFisicas.size() != 0) {
-			for(int i=0; i<pessoasFisicas.size(); i++) {
-				System.out.println("_____________ Contato "+(i+1)+" ____________");
-				System.out.println("\n > Nome: "+pessoasFisicas.get(i).nome);
-				System.out.println(" > Telefone: "+pessoasFisicas.get(i).telefone);
-				System.out.println(" > CPF: "+pessoasFisicas.get(i).cpf.numeroCpf);	
-				System.out.println(" > Local de emissao do CPF: "+pessoasFisicas.get(i).cpf.localDeEmissao);					
-				System.out.println(" > Tipo de Contato: "+pessoasFisicas.get(i).tipoDeContato());
-			}										
-		}else {
-			System.out.println("____________________________________");
-			System.out.println("\n------ Lista de contatos vazia -----");
-		}
+	public void escolherOperacao() {
+		int op;
+		do {
+			op = iu.pegarOpcao();
+			switch (op) {
+			case 1: {
+				System.out.println("=========== LISTAR PESSOAS =========\n");
+				pFDAO.listar();
+				System.out.println("\n====================================");			
+				break;
+			}
+			case 2: {
+				System.out.println("====== ADICIONAR NOVA PESSOA =======");
+				pFDAO.adicionar();
+				System.out.println("\n====================================");				
+				break;
+			}
+			case 3: {
+				System.out.println("========= REMOVER PESSOA ===========\n");
+				pFDAO.remover();
+				System.out.println("\n====================================");				
+				break;
+			}
+			case 4: {
+				System.out.println("========== EDITAR PESSOA ===========\n");
+				pFDAO.editar();
+				System.out.println("\n====================================");
+				break;
+			}
+			case 5: {
+				System.out.println("============== LIXEIRA =============\n");
+				pFDAO.lixeira();
+				System.out.println("\n====================================");
+				break;
+			}
+			case 6: {
+				System.out.println("============== BUSCAR ==============");
+				pFDAO.buscar();
+				System.out.println("\n====================================");
+				break;
+			}
+			case 7: {
+				System.out.println(" ----- Saindo de Agenda Fisica ---- ");
+				break;
+			}
+			default:
+				System.out.println(" --------- Opcao Invalida --------- ");
+			}
+			
+		}while(op != 7);
 	}
 }

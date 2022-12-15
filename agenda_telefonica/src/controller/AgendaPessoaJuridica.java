@@ -1,64 +1,59 @@
 package controller;
 
-import java.util.ArrayList;
+import view.Agenda;
 
-import model.Cnpj;
-import model.Cpf;
-import model.PessoaFisica;
-import model.PessoaJuridica;
-
-public class AgendaPessoaJuridica implements DAO{
-	public ArrayList<PessoaJuridica> pessoasJuridicas = new ArrayList<PessoaJuridica>();
-	
+public class AgendaPessoaJuridica extends Agenda {
+	public DAO pJDAO = new PessoaJuridicaDAO();
 	@Override
-	public void adicionarPessoa() {
-		PessoaJuridica contato = new PessoaJuridica();
-		Cnpj umaCnpj = new Cnpj();
-		System.out.print("\n- Nome: ");
-		contato.nome = iu.sc.next();
-		System.out.print("- Telefone: ");
-		contato.telefone = iu.sc.next();
-		System.out.print("- CNPJ: ");
-		umaCnpj.numeroCnpj = iu.sc.next();
-		System.out.print("- Local de emissao da CNPJ: ");
-		umaCnpj.localDeEmissao = iu.sc.next();
-		contato.cnpj = umaCnpj;
-		
-		PessoaFisica responsavel = new PessoaFisica();
-		Cpf umCpf = new Cpf();
-		System.out.print("\n- Nome do Responsavel: ");
-		responsavel.nome = iu.sc.next();
-		System.out.print("- Telefone do Responsavel: ");
-		responsavel.telefone = iu.sc.next();
-		System.out.print("- CPF do Responsavel: ");
-		umCpf.numeroCpf = iu.sc.next();
-		System.out.print("- Local de emissao do CPF do Responsavel: ");
-		umCpf.localDeEmissao = iu.sc.next();
-		responsavel.cpf = umCpf;
-		
-		contato.responsavel = responsavel;
-		pessoasJuridicas.add(contato);
-	}
-	@Override
-	public void listarPessoa() {
-		if(pessoasJuridicas.size() != 0) {
-			for(int i=0; i<pessoasJuridicas.size(); i++) {
-				System.out.println("_____________ Contato "+(i+1)+" ____________");
-				System.out.println("\n > Nome: "+pessoasJuridicas.get(i).nome);
-				System.out.println(" > Telefone: "+pessoasJuridicas.get(i).telefone);
-				System.out.println(" > CNPJ: "+pessoasJuridicas.get(i).cnpj.numeroCnpj);		
-				System.out.println(" > Local de emissao da CNPJ: "+pessoasJuridicas.get(i).cnpj.localDeEmissao);					
-				System.out.println(" > Tipo de Contato: "+pessoasJuridicas.get(i).tipoDeContato());
-				System.out.println(" > Responsavel: ");
-				System.out.println("    - Nome: "+pessoasJuridicas.get(i).responsavel.nome);
-				System.out.println("    - Telefone: "+pessoasJuridicas.get(i).responsavel.telefone);
-				System.out.println("    - CPF: "+pessoasJuridicas.get(i).responsavel.cpf.numeroCpf);	
-				System.out.println("    - Local de emissao do CPF: "+pessoasJuridicas.get(i).responsavel.cpf.localDeEmissao);					
-				System.out.println("    - Tipo de Contato: "+pessoasJuridicas.get(i).responsavel.tipoDeContato());
+	public void escolherOperacao() {
+		int op;
+		do {
+			op = iu.pegarOpcao();
+			switch (op) {
+			case 1: {
+				System.out.println("=========== LISTAR PESSOAS =========\n");
+				pJDAO.listar();
+				System.out.println("\n====================================");			
+				break;
 			}
-		}else {
-			System.out.println("____________________________________");
-			System.out.println("\n------ Lista de contatos vazia -----");
-		}
+			case 2: {
+				System.out.println("====== ADICIONAR NOVA PESSOA =======");
+				pJDAO.adicionar();
+				System.out.println("\n====================================");				
+				break;
+			}
+			case 3: {
+				System.out.println("========= REMOVER PESSOA ===========\n");
+				pJDAO.remover();
+				System.out.println("\n====================================");				
+				break;
+			}
+			case 4: {
+				System.out.println("========== EDITAR PESSOA ===========\n");
+				pJDAO.editar();
+				System.out.println("\n====================================");
+				break;
+			}
+			case 5: {
+				System.out.println("============== LIXEIRA =============\n");
+				pJDAO.lixeira();
+				System.out.println("\n====================================");
+				break;
+			}
+			case 6: {
+				System.out.println("============== BUSCAR ==============");
+				pJDAO.buscar();
+				System.out.println("\n====================================");
+				break;
+			}
+			case 7: {
+				System.out.println(" --- Saindo de Agenda Juridica ---- ");
+				break;
+			}
+			default:
+				System.out.println(" --------- Opcao Invalida --------- ");
+			}
+			
+		}while(op != 7);
 	}
 }
