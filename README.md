@@ -55,5 +55,7 @@ O objetivo com este projeto é fazer uma agenda telefônica, utilizando boas pr�
     └───└── Main.java
     
 ## 🚩 Prévia
-
-<img src="previa.png" width="300">
+<span>
+    <img src="previa-1.png" width="300">
+    <img src="previa-2.png" width="300">
+</span>
