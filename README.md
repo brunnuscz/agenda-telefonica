@@ -10,7 +10,7 @@ O objetivo com este projeto é fazer uma agenda telefônica, utilizando boas pr�
     a) A classe Agenda é a classe principal do sistema e contém o método main.
     b) Toda a comunicação com o usuário (coleta de dados) será feita pelas classes do pacote controle.
     c) As classes do pacote modelo representam as informações que o software irá manipular.
-    d) A classe de BaseDeDados contém um mapa que armazenará todos os contatos separados pela letra inicial.
+    d) A classe de BaseDeDados contém um mapa que armazenará todos os contatos.
     e) A letra inicial é chave para uma lista de contatos que tem o nome iniciados com aquela letra.
 
 ## 📁 Projeto
