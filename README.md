@@ -22,7 +22,7 @@ O objetivo com este projeto é fazer uma agenda telefônica, utilizando boas pr�
 
     https://www.eclipse.org/downloads/
     
-### 📍 Lembre de instalar o jdk na sua máquina:
+### 📍 Lembre de instalar o JDK na sua máquina:
 
     https://www.oracle.com/br/java/technologies/downloads/
 
@@ -37,9 +37,22 @@ O objetivo com este projeto é fazer uma agenda telefônica, utilizando boas pr�
     │ │ └── PessoaFisicaDAO.java
     │ │ └── PessoaJuridicaDAO.java
     │ ├── model
-    │ │ └── AgendaPessoa
+    │ │ └── BD.java
+    │ │ └── Cnpj.java
+    │ │ └── Cpf.java
+    │ │ └── Documento.java
+    │ │ └── Operacao.java
+    │ │ └── Pessoa.java
+    │ │ └── PessoaFisica.java
+    │ │ └── PessoaFisicaBd.java
+    │ │ └── PessoaJuridica.java
+    │ │ └── PessoaJuridicaBd.java
+    │ │ └── Telefone.java
     │ ├── view
     │ │ └── Agenda.java
     │ │ └── InterfaceUsuario.java
     └───└── Main.java
     
+## 🚩 Prévia
+
+<img src="previa.png" width="100%">
