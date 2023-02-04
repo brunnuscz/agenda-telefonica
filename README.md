@@ -18,7 +18,7 @@ O objetivo com este projeto é fazer uma agenda telefônica, utilizando boas pr�
 
     git clone https://github.com/brunnuscz/agenda-telefonica.git
 
-### 📍 Você pode utilizar o a IDE chamada Eclipse para rodar o projeto:
+### 📍 Você pode utilizar a IDE chamada Eclipse para rodar o projeto:
 
     https://www.eclipse.org/downloads/
     
