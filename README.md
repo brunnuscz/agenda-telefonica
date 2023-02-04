@@ -55,4 +55,4 @@ O objetivo com este projeto é fazer uma agenda telefônica, utilizando boas pr�
     
 ## 🚩 Prévia
 
-<img src="previa.png" width="100%">
+<img src="previa.png" width="300">
